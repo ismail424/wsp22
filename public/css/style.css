@@ -5,7 +5,11 @@
     background-color: #24252ab2;
 
   }
-  
+  #gsdb_title{
+    color: white;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
   header {
     display: flex;
     justify-content: space-between;
