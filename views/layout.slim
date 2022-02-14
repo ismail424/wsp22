@@ -9,22 +9,21 @@ html lang="en"
   body
     header
         a.logo href="/" 
-        div
           img src="/img/logo.png" alt="GSDb Logo" height="50" 
         nav
-        ul.nav__links
-            li
-            a href="#"  Games
-            li
-            a href="#"  Streamers
-        a.cta.right href="#"  Login
-        p.menu.cta.right Menu
-    #mobile__menu.overlay
-        a.close &times;
-        .overlay__content
-            a href="#"  Games
-            a href="#"  Streamers
-            a href="#"  Login
+          ul
+              li
+                a href="/games" Games
+              li
+                a href="/streamers" Streamers
+    /     a.cta.right href="#" Login
+    /     p.menu.cta.right Menu
+    / #mobile__menu.overlay
+    /     a.close &times;
+    /     .overlay__content
+    /         a href="#" Games
+    /         a href="#" Streamers
+    /         a href="#" Login
 
     ==yield
     script src="js/mobile.js" type="text/javascript" 

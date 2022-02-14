@@ -1,0 +1,119 @@
+html,
+body {
+    margin: 0;
+    background-color: #2f343f;
+    color: #fff;
+}
+
+:root {
+    font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+background: #fff; 
+}
+
+::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #888; 
+}
+
+body > header {
+    display: flex;
+    background-color: #14161b;
+    padding: .6rem 3rem;
+    gap: 1rem;
+    align-items: center;
+
+    nav>ul {
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.container{
+    background-color: #14161b;
+}
+
+.game-container{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    padding: 2rem;
+    margin: 0 auto;
+    gap: 2rem;
+    max-width: 90vw;
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        background-color: #262a32;
+        border: 1px solid #2f343e;
+        color: white;
+        text-decoration: none;
+        position: relative;
+
+        .header::after {
+            content: "Läs mer";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity .2s;
+            background: linear-gradient(135deg, rgba(145,71,255,0.9), rgba(43,187,228,0.9));
+            inset: 0px;
+        }
+
+        &:hover .header::after {
+            opacity: 1;
+        }
+
+        .header {
+            aspect-ratio: 3 / 4;
+            width: 100%; 
+            position: relative;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+            }
+        }
+
+        .caption {
+            padding: 1rem;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin: 0;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            small {
+                opacity: .5;
+            }
+        }
+
+        
+    }
+}
