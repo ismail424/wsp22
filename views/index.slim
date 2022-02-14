@@ -1,3 +1,27 @@
 - @MyTitle = "Home"
 
 
+/ Language: slim
+.container
+    .game_container
+        a.game_card href="/games/1"
+            .game_cover
+                img.img-responsive.cover_uniform.game-card-image.cover_big.cover_big src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2m9w.jpg"
+            .game-card-overlay
+                | Läs
+                br>/
+                | Mer
+            .game-card-caption
+                p.game-card-name = "Ready or Not"
+                small.game-card-subtitle = "Indie"
+    .game_container
+        a.game_card href="/games/1"
+            .game_cover
+                img.img-responsive.cover_uniform.game-card-image.cover_big.cover_big src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2m9w.jpg" /
+            .game-card-overlay
+                | Läs
+                br>/
+                | Mer
+            .game-card-caption
+                p.game-card-name = "Ready or Not"
+                small.game-card-subtitle = "Indie"

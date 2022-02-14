@@ -6,30 +6,28 @@ html lang="en"
     link rel="stylesheet" href="/css/style.css"/
     title = "GSDb #{@MyTitle}"
     link src="favicon.icon" rel="icon" type="image/x-icon"/
-    link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet" /
-
   body
     header
         a.logo href="/" 
-        #gsdb_title
-          p = "GSDb"
+        div
+          img src="/img/logo.png" alt="GSDb Logo" height="50" 
         nav
         ul.nav__links
             li
-            a href="#"  Services
+            a href="#"  Games
             li
-            a href="#"  Projects
-            li
-            a href="#"  About
-        a.cta href="#"  Contact
-        p.menu.cta Menu
+            a href="#"  Streamers
+        a.cta.right href="#"  Login
+        p.menu.cta.right Menu
     #mobile__menu.overlay
         a.close &times;
         .overlay__content
-            a href="#"  Services
-            a href="#"  Projects
-            a href="#"  About
-    script src="js/mobile.js" type="text/javascript" 
+            a href="#"  Games
+            a href="#"  Streamers
+            a href="#"  Login
 
     ==yield
-  
+    script src="js/mobile.js" type="text/javascript" 
+    script src="js/script.js" type="text/javascript" 
+
+
