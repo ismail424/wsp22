@@ -7,3 +7,4 @@ def connect_to_db()
     database.results_as_hash = true
     database
 end
+
