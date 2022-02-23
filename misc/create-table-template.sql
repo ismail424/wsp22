@@ -61,7 +61,9 @@ CREATE TABLE `Platforms`(
 
 CREATE TABLE `Images`(
     `id` integer primary key autoincrement,
-    `src` TEXT NOT NULL
+    `src` TEXT NOT NULL,
+    `game_id` INT NOT NULL,
+    FOREIGN KEY (`game_id`) REFERENCES `VideoGames`(`id`)
 );
 
 CREATE TABLE `GenreToGame`(
@@ -70,12 +72,7 @@ CREATE TABLE `GenreToGame`(
     FOREIGN KEY(`game_id`) REFERENCES `VideoGames`(`id`),
     FOREIGN KEY(`genre_id`) REFERENCES `Genres`(`id`)
 );
-CREATE TABLE `ImageToGame`(
-    `image_id` INT NOT NULL,
-    `game_id` INT NOT NULL,
-    FOREIGN KEY(`game_id`) REFERENCES `VideoGames`(`id`),
-    FOREIGN KEY(`image_id`) REFERENCES `Images`(`id`)
-);
+
 CREATE TABLE `PlatformToGame`(
     `platform_id` INT NOT NULL,
     `game_id` INT NOT NULL,
