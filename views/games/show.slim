@@ -1,5 +1,5 @@
 .game_show_container
-  .background_img style="background-image: url('#{videogame["img_src"].split(",")[3].gsub("t_thumb","t_screenshot_big")}');"
+  .background_img style="background-image: url('#{videogame["img_src"].split(",")[-1].gsub("t_thumb","t_screenshot_big")}');"
   .game_content
     img.img_cover src="#{videogame["img_src"].split(",")[0].gsub("t_thumb","t_cover_big")}"
     .game_content_body
