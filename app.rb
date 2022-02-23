@@ -17,20 +17,20 @@ end
 # Home page
 get("/") do
     database = connect_to_db()
-    videogames = database.execute("SELECT * FROM VideoGames LIMIT 10;")
+    videogames = database.execute("SELECT json_object('id', id, 'name', name, 'description', description, 'realse_date',realse_date) AS VideoGames FROM VideoGames LIMIT 1;")
+    puts videogames
     slim(:index, locals: { videogames: videogames })
 end
 
 # Games Routes
 get('/games') do
     database = connect_to_db()
-    videogames = database.execute("SELECT * FROM VideoGames")
-    slim(:"games/index" , locals: { videogames: videogames })
+    videogames = database.execute('SELECT * FROM VideoGames')
+    slim(:"games/index", locals: { videogames: videogames })
 end
 get('/games/:id') do
     id = params[:id].to_i
     database = connect_to_db()
-    videogame = database.execute("SELECT * FROM VideoGames WHERE id = ?", id)[0]
+    videogame = database.execute('SELECT * FROM VideoGames WHERE id = ?', id)[0]
     slim(:"games/show", locals: { videogame: videogame })
 end
-
