@@ -2,8 +2,8 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'slim'
 require 'sassc'
-require_relative './utils'
-
+require_relative 'utils'
+require_relative 'database'
 set :port, 5000
 set :bind, '0.0.0.0'
 set :sessions, enable
@@ -16,10 +16,15 @@ end
 
 # Home page
 get("/") do
-    database = connect_to_db()
-    videogames = database.execute("SELECT json_object('id', id, 'name', name, 'description', description, 'realse_date',realse_date) AS VideoGames FROM VideoGames LIMIT 1;")
-    puts videogames
-    slim(:index, locals: { videogames: videogames })
+    # database = connect_to_db()
+    # videogames = database.execute("SELECT * FROM VideoGames LIMIT 10;")
+    # for videogame in videogames
+    #     image_cover = database.execute("SELECT * FROM Images WHERE game_id = ?", videogame["id"])[0]
+    #     videogame["cover"] = image_cover
+    # end
+    p VideoGames.get(2, true)
+    # slim(:index, locals: { videogames: videogames })
+    "Hello World"
 end
 
 # Games Routes

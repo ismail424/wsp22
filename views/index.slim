@@ -9,7 +9,7 @@ div.container
             - videogames.each do |game|
                 a.card href="/games/#{game["id"]}"
                     .header
-                        img src="#{game["img_src"].split(",")[0].gsub("t_thumb","t_cover_big")}"
+                        img src="#{game["cover"]["src"].gsub("t_thumb", "t_cover_big")}"
                     .caption
                         p.name = game["name"]
                         small.subtitle = game["genre"]
