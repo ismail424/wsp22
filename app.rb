@@ -5,7 +5,7 @@ require 'sassc'
 require_relative './utils'
 
 set :port, 5000
-set :bind, '0.0.0.0'
+# set :bind, '0.0.0.0'
 set :sessions, enable
 set :session_secret, 'super secret'
 
@@ -17,9 +17,20 @@ end
 # Home page
 get("/") do
     database = connect_to_db()
-    videogames = database.execute("SELECT json_object('id', id, 'name', name, 'description', description, 'realse_date',realse_date) AS VideoGames FROM VideoGames LIMIT 1;")
-    puts videogames
-    slim(:index, locals: { videogames: videogames })
+    all_games = database.execute("SELECT * FROM VideoGames LIMIT 1;")
+    for game in all_games
+        images = database.execute("SELECT * FROM Images WHERE game_id = #{game['id']};")
+        game['images'] = images
+        
+        genres = database.execute("SELECT * FROM Genres WHERE game_id = #{game['id']};")
+        game['genres'] = genres
+
+        platforms = database.execute("SELECT * FROM Platforms WHERE game_id = #{game['id']};")
+        game['platforms'] = platforms
+    end
+    
+    # slim(:index, locals: { videogames: videogames })
+    "Hello World"
 end
 
 # Games Routes
