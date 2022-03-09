@@ -17,7 +17,7 @@ end
 
 # Home page
 get("/") do 
-    VideoGame.find(5)
+    VideoGame.find(5).genres.to_s
     # slim(:index, locals: { videogames: videogames })
 end
 

@@ -60,6 +60,8 @@ class VideoGame  < DbModel
         @name = data['name']
         @description = data['description']
         @release_date = data['realse_date'] 
+        @genres = self.get_genres
+        @platforms = self.get_platforms
     end
 
     def self.find_by_name(name)
@@ -69,10 +71,18 @@ class VideoGame  < DbModel
         data && VideoGame.new(data)
     end
 
-    def genres
+    private def get_genres
         result = []
         db.execute("SELECT * FROM GenreToGame WHERE game_id = ?", @id).each do |row|
             result << Genre.find(row['genre_id'])
+        end
+        result
+    end
+
+    private def get_platforms
+        result = []
+        db.execute("SELECT * FROM PlatformToGame WHERE game_id = ?", @id).each do |row|
+            result << Platform.find(row['platform_id'])
         end
         result
     end
