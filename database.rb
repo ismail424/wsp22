@@ -28,10 +28,27 @@ class DbModel
         return false if other.nil?
         @id == other.id
     end
-  end
 
+    def self.find(id)
+        database = db()
+        data = database.execute("SELECT * FROM #{table_name} WHERE id = ?", id)[0]
+        self.new(data)
+    end
+  
+    def self.all(limit = nil)
+        database = db()
+        results = []
+        if limit
+            results = database.execute("SELECT * FROM #{table_name} LIMIT #{limit}")
+        else
+            results = database.execute("SELECT * FROM #{table_name}")
+        end
+        results.map {|data| self.new(data)}
+    end  
 
-# videoGame class
+end
+
+# A class for all database methods and objects
 class VideoGames < DbModel
     attr_reader :name
     
@@ -39,37 +56,19 @@ class VideoGames < DbModel
         'VideoGames'
     end
     
-  
     def initialize(data)
         super data
         @name = data['name']
         @description = data['description']
         @release_date = data['realse_date'] 
     end
+
     def self.find_by_name(name)
         return nil if name.empty?
   
         data = db.execute("SELECT * FROM #{table_name} WHERE email = ?", name).first
         data && VideoGames.new(data)
     end
-  
-    def self.find_by_id(id)
-        data = db.execute("SELECT * FROM #{table_name} WHERE id = ?", id).first
-        data && VideoGames.new(data)
-    end
-
-
-    def self.all(limit = nil)
-        results = []
-
-        if limit
-            results = db.execute("SELECT * FROM #{table_name} LIMIT #{limit}")
-        else
-            results = db.execute("SELECT * FROM #{table_name}")
-        end
-        results.map {|data| VideoGames.new(data)}
-    end
-
   
 end
   

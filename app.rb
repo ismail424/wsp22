@@ -17,7 +17,7 @@ end
 
 # Home page
 get("/") do 
-    puts VideoGames.all(10)
+    puts VideoGames.all(4)
     # slim(:index, locals: { videogames: videogames })
     "Hello World"
 end
