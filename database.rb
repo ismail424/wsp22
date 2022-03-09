@@ -11,7 +11,7 @@ end
 
 # A class for all database methods and objects
 class DbModel
-    attr_reader :id
+    attr_reader :id, :hash
   
     def self.table_name
     end
@@ -21,6 +21,7 @@ class DbModel
     end
   
     def initialize(data)
+        @hash = data
         @id = data['id']
     end
   
@@ -30,18 +31,16 @@ class DbModel
     end
 
     def self.find(id)
-        database = db()
-        data = database.execute("SELECT * FROM #{table_name} WHERE id = ?", id)[0]
-        self.new(data)
+        data = db.execute("SELECT * FROM #{table_name} WHERE id = ?", id).first
+        data && self.new(data)
     end
   
     def self.all(limit = nil)
-        database = db()
         results = []
         if limit
-            results = database.execute("SELECT * FROM #{table_name} LIMIT #{limit}")
+            results = db.execute("SELECT * FROM #{table_name} LIMIT #{limit}")
         else
-            results = database.execute("SELECT * FROM #{table_name}")
+            results = db.execute("SELECT * FROM #{table_name}")
         end
         results.map {|data| self.new(data)}
     end  
@@ -49,7 +48,7 @@ class DbModel
 end
 
 # A class for all database methods and objects
-class VideoGames < DbModel
+class VideoGame  < DbModel
     attr_reader :name
     
     def self.table_name
@@ -67,8 +66,42 @@ class VideoGames < DbModel
         return nil if name.empty?
   
         data = db.execute("SELECT * FROM #{table_name} WHERE email = ?", name).first
-        data && VideoGames.new(data)
+        data && VideoGame.new(data)
     end
-  
+
+    def genres
+        result = []
+        db.execute("SELECT * FROM GenreToGame WHERE game_id = ?", @id).each do |row|
+            result << Genre.find(row['genre_id'])
+        end
+        result
+    end
 end
   
+# Genre class
+class Genre < DbModel
+    attr_reader :name
+    
+    def self.table_name
+        'Genres'
+    end
+    
+    def initialize(data)
+        super data
+        @name = data['name']
+    end
+end
+
+# Platform class
+class Platform < DbModel
+    attr_reader :name
+
+    def self.table_name
+        'Platforms'
+    end
+
+    def initialize(data)
+        super data
+        @name = data['name']
+    end
+end

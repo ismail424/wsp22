@@ -17,20 +17,17 @@ end
 
 # Home page
 get("/") do 
-    puts VideoGames.all(4)
+    VideoGame.find(5)
     # slim(:index, locals: { videogames: videogames })
-    "Hello World"
 end
 
 # Games Routes
 get('/games') do
-    database = connect_to_db()
-    videogames = database.execute('SELECT * FROM VideoGames')
+    videogames = VideoGame.all(10)
     slim(:"games/index", locals: { videogames: videogames })
 end
 get('/games/:id') do
     id = params[:id].to_i
-    database = connect_to_db()
-    videogame = database.execute('SELECT * FROM VideoGames WHERE id = ?', id)[0]
+    videogames = VideoGame.find(id)
     slim(:"games/show", locals: { videogame: videogame })
 end
