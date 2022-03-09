@@ -13,3 +13,5 @@ gem "sassc", "~> 2.4"
 gem "bcrypt", "~> 3.1"
 gem "sqlite3", "~> 1.4"
 gem "slim", "~> 4.1"
+
+gem "rufo", "~> 0.13.0"

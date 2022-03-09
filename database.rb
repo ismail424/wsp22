@@ -8,20 +8,68 @@ def db()
     database
 end
 
-class VideoGames
-    # Get all videogames from the database 
-    # params: limit (int, deafult: 10), random (bool, default: false)
-    # @return [Array] videogames
-    def self.get(limit = 10, random = false)
-        if random == true
-            return db.execute("SELECT * FROM VideoGames ORDER BY RANDOM() LIMIT ?;", limit)
-        end
-        
-        db.execute('SELECT * FROM VideoGames LIMIT ?', limit)
+
+# A class for all database methods and objects
+class DbModel
+    attr_reader :id
+  
+    def self.table_name
+    end
+    
+    def table_name
+        self.class.table_name
+    end
+  
+    def initialize(data)
+        @id = data['id']
+    end
+  
+    def ==(other)
+        return false if other.nil?
+        @id == other.id
+    end
+  end
+
+
+# videoGame class
+class VideoGames < DbModel
+    attr_reader :name
+    
+    def self.table_name
+        'VideoGames'
+    end
+    
+  
+    def initialize(data)
+        super data
+        @name = data['name']
+        @description = data['description']
+        @release_date = data['realse_date'] 
+    end
+    def self.find_by_name(name)
+        return nil if name.empty?
+  
+        data = db.execute("SELECT * FROM #{table_name} WHERE email = ?", name).first
+        data && VideoGames.new(data)
+    end
+  
+    def self.find_by_id(id)
+        data = db.execute("SELECT * FROM #{table_name} WHERE id = ?", id).first
+        data && VideoGames.new(data)
     end
 
+
+    def self.all(limit = nil)
+        results = []
+
+        if limit
+            results = db.execute("SELECT * FROM #{table_name} LIMIT #{limit}")
+        else
+            results = db.execute("SELECT * FROM #{table_name}")
+        end
+        results.map {|data| VideoGames.new(data)}
+    end
+
+  
 end
-
-
-
-class DBmodel
+  
