@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+    push:
+        branches: [master]
+    # schedule:
+    #     - cron: "0 5 * * */3"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name: Build and deploy website to https://gsdb.sacic.ml
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Upload Files to server
+              uses: Creepios/sftp-action@v1.0.3
+              with:
+                  host: ${{ secrets.host }}
+                  port: 2022
+                  username: "github.${{ secrets.pterodactyl_server_id }}"
+                  password: ${{ secrets.password }}
+                  localPath: "./"
+                  remotePath: "./"
+            - name: Send notice in console showing that github actions is restarting the container
+              run: 'curl -H ''Authorization: Bearer ${{ secrets.pterodactyl_api_token }}'' -H ''Accept: application/json'' -H ''Content-Type: application/json'' -d ''{"command": "Github Actions finished, restarting"}'' ${{ secrets.pterodactyl_app_url }}/api/client/servers/${{ secrets.pterodactyl_server_id }}/command'
+            - name: Restart remote pterodactyl server
+              run: 'curl -H ''Authorization: Bearer ${{ secrets.pterodactyl_api_token }}'' -H ''Content-Type: application/json'' -d ''{"signal": "restart"}'' ${{ secrets.pterodactyl_app_url }}/api/client/servers/${{ secrets.pterodactyl_server_id }}/power'

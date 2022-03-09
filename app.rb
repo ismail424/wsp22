@@ -5,7 +5,7 @@ require 'sassc'
 require_relative 'utils'
 require_relative 'database'
 set :port, 5000
-set :bind, '0.0.0.0'
+# set :bind, '0.0.0.0'
 set :sessions, enable
 set :session_secret, 'super secret'
 
@@ -23,6 +23,19 @@ get("/") do
     #     videogame["cover"] = image_cover
     # end
     p VideoGames.get(2, true)
+    database = connect_to_db()
+    all_games = database.execute("SELECT * FROM VideoGames LIMIT 1;")
+    for game in all_games
+        images = database.execute("SELECT * FROM Images WHERE game_id = #{game['id']};")
+        game['images'] = images
+        
+        genres = database.execute("SELECT * FROM Genres WHERE game_id = #{game['id']};")
+        game['genres'] = genres
+
+        platforms = database.execute("SELECT * FROM Platforms WHERE game_id = #{game['id']};")
+        game['platforms'] = platforms
+    end
+    
     # slim(:index, locals: { videogames: videogames })
     "Hello World"
 end
