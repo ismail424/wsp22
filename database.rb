@@ -21,7 +21,6 @@ class DbModel
     end
   
     def initialize(data)
-        @hash = data
         @id = data['id']
     end
   
@@ -49,7 +48,7 @@ end
 
 # A class for all database methods and objects
 class VideoGame  < DbModel
-    attr_reader :name
+    attr_reader :name, :description, :release_date, :genres, :platforms, :images
     
     def self.table_name
         'VideoGames'
@@ -62,6 +61,7 @@ class VideoGame  < DbModel
         @release_date = data['realse_date'] 
         @genres = self.get_genres
         @platforms = self.get_platforms
+        @images = self.get_images
     end
 
     def self.find_by_name(name)
@@ -71,18 +71,29 @@ class VideoGame  < DbModel
         data && VideoGame.new(data)
     end
 
-    private def get_genres
+    def get_genres
         result = []
+        
         db.execute("SELECT * FROM GenreToGame WHERE game_id = ?", @id).each do |row|
             result << Genre.find(row['genre_id'])
         end
         result
     end
 
-    private def get_platforms
+    def get_platforms
         result = []
+
         db.execute("SELECT * FROM PlatformToGame WHERE game_id = ?", @id).each do |row|
             result << Platform.find(row['platform_id'])
+        end
+        result
+    end
+
+    def get_images
+        result = []
+
+        db.execute("SELECT * FROM Images WHERE game_id = ?", @id).each do |row|
+            result << Image.find(row['id'])
         end
         result
     end
@@ -114,4 +125,18 @@ class Platform < DbModel
         super data
         @name = data['name']
     end
+end
+
+class Image < DbModel
+    attr_reader :src
+
+    def self.table_name
+        'Images'
+    end
+
+    def initialize(data)
+        super data
+        @src = data['src']
+    end
+
 end

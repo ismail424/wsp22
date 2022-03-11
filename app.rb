@@ -17,8 +17,8 @@ end
 
 # Home page
 get("/") do 
-    VideoGame.find(5).genres.to_s
-    # slim(:index, locals: { videogames: videogames })
+    top_10_videogames = VideoGame.all(10)
+    slim(:index, locals: { videogames: top_10_videogames })
 end
 
 # Games Routes
