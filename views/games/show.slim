@@ -1,12 +1,18 @@
 .game_show_container
-  .background_img style="background-image: url('#{videogame["img_src"].split(",")[-1].gsub("t_thumb","t_screenshot_big")}');"
+  
+  .background_img style="background-image: url('#{videogame.images.last.src.gsub('t_thumb', 't_screenshot_big')}');"
   .game_content
-    img.img_cover src="#{videogame["img_src"].split(",")[0].gsub("t_thumb","t_cover_big")}"
-    .game_content_body
+
+    img.img_cover src="#{videogame.images.first.src.gsub('t_thumb', 't_cover_big')}"
+
     .game_content_header
-      .game_title = videogame["name"]
-      .game_realse_date = videogame["realse_date"]
-      .game_genre = videogame["genre"]
-      .game_platform = videogame["platform"]
-    .game_review
-    .game_rating
+      .game_title = videogame.name
+      .game_realse_date = videogame.release_date
+      .game_genre = videogame.genres.map { |genre| genre.name }.join(', ')
+      .game_platform = videogame.platforms.map { |platform| platform.name }.join(', ')
+
+    .game_content_body
+      h1 = "Description:"
+      .game_description = videogame.description
+      .game_review
+

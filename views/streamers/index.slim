@@ -1,0 +1,17 @@
+- @MyTitle = "Streamers"
+
+
+div.container
+
+    .game-container
+        - if !streamers
+            p = "No Streamers found!"
+        - else
+            - streamers.each do |streamer|
+                a.card href="/streamers/#{streamer.id}"
+                    .header
+                        img src="#{streamer.img_src}"
+                    .caption
+                        p.name = streamer.streamer_name
+                        small.subtitle = streamer.favorite_game
+        

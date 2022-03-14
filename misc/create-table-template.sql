@@ -38,8 +38,8 @@ CREATE TABLE `Streamers`(
     `height` INT NULL,
     `description` TEXT NOT NULL,
     `platform` TEXT NOT NULL,
-    `favorite_game` INT NOT NULL,
-);
+    `favorite_game` TEXT NOT NULL
+    );
 
 CREATE TABLE `VideoGames`(
     `id` integer primary key autoincrement,

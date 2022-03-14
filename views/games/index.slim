@@ -1,14 +1,19 @@
 - @MyTitle = "Games"
 
+
 div.container
+
     .game-container
         - if !videogames
             p = "No Video Games Found!"
         - else
             - videogames.each do |game|
-                a.card href="/games/#{game["id"]}"
+                a.card href="/games/#{game.id}"
                     .header
-                        img src="#{game["img_src"].split(",")[0].gsub("t_thumb","t_cover_big")}"
+                        img src="#{game.images.first.src.gsub('t_thumb', 't_cover_big')}"
                     .caption
-                        p.name = game["name"]
-                        small.subtitle = game["genre"]
+                        p.name = game.name
+                        small.subtitle = game.genres.map(&:name).join(', ')
+    - if videogames.size < 70
+        button onclick='window.location.replace("/games?limit=all")' = "Load All Games"
+

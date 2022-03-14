@@ -64,11 +64,24 @@ class VideoGame  < DbModel
         @images = self.get_images
     end
 
-    def self.find_by_name(name)
-        return nil if name.empty?
-  
-        data = db.execute("SELECT * FROM #{table_name} WHERE email = ?", name).first
-        data && VideoGame.new(data)
+    def self.search(name)
+        results = []
+
+        db.execute("SELECT * FROM #{table_name} WHERE name LIKE ?", "%#{name}%").each do |row|
+            results << self.new(row)
+        end
+
+        results
+    end
+
+    def self.filter_by_genre(genre)
+        results = []
+
+        db.execute("SELECT * FROM #{table_name} WHERE genres LIKE ?", "%#{genre}%").each do |row|
+            results << self.new(row)
+        end
+
+        results
     end
 
     def get_genres
@@ -80,7 +93,7 @@ class VideoGame  < DbModel
         result
     end
 
-    def get_platforms
+    private def get_platforms
         result = []
 
         db.execute("SELECT * FROM PlatformToGame WHERE game_id = ?", @id).each do |row|
@@ -89,7 +102,7 @@ class VideoGame  < DbModel
         result
     end
 
-    def get_images
+    private def get_images
         result = []
 
         db.execute("SELECT * FROM Images WHERE game_id = ?", @id).each do |row|
@@ -97,6 +110,27 @@ class VideoGame  < DbModel
         end
         result
     end
+end
+
+# Streamers class
+class Streamer < DbModel
+    attr_reader :img_src, :streamer_name, :full_name, :age, :height, :description, :platform, :favorite_game
+    def self.table_name
+        'Streamers'
+    end
+
+    def initialize(data)
+        super data
+        @img_src = data['img_src']
+        @streamer_name = data['streamer_name']
+        @full_name = data['full_name']
+        @age = data['age']
+        @height = data['height']
+        @description = data['description']
+        @platform = data['platform']
+        @favorite_game = data['favorite_game']
+    end
+
 end
   
 # Genre class
