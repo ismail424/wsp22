@@ -1,0 +1,16 @@
+- @MyTitle = "Login"
+
+.login
+    form.login-form
+        h1 Log in
+        label
+            |Username
+            input type="text" placeholder="username" name="username" autocomplete="username" 
+        label
+            |Password
+            input type="password" placeholder="password" autocomplete="password" name="password"
+        input type="submit" value="Log in"
+
+        .actions
+            a.forgot-password href="javascript:;" Forgot password?
+            a.sign-up href="/register" Sign up

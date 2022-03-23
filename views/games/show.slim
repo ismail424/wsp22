@@ -3,7 +3,7 @@
   .background_img style="background-image: url('#{videogame.images.last.src.gsub('t_thumb', 't_screenshot_big')}');"
   .game_content
 
-    img.img_cover src="#{videogame.images.first.src.gsub('t_thumb', 't_cover_big')}"
+    img.img_cover src="#{videogame.images.first.src.gsub('t_thumb', 't_cover_big')}" alt ="#{videogame.name}"
 
     .game_content_header
       .game_title = videogame.name

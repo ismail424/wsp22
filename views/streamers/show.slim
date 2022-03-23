@@ -3,7 +3,7 @@
   .background_img style="background-image: url('#{streamer.img_src}');"
   .game_content
 
-    img.img_cover src="#{streamer.img_src}"
+    img.img_cover src="#{streamer.img_src}" alt ="#{streamer.full_name}"
 
     .game_content_header
       .game_title = "#{streamer.streamer_name}"
@@ -16,7 +16,7 @@
         br
         | Platform #{streamer.platform}
         br
-        | Favorite game: #{streamer.favorite_game}
+        | Favorite game: #{streamer.favorite_game}e
     .game_content_body
       h1 = "Description:"
       .game_description = streamer.description

@@ -9,7 +9,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        name: Build and deploy website to https://gsdb.sacic.ml
+        name: Build and deploy website to https://gsdb.sacic.dev
 
         steps:
             - name: Checkout repository

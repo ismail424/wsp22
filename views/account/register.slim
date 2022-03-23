@@ -1,0 +1,22 @@
+- @MyTitle = "Register"
+
+.register
+    form.register-form
+        h1 Register
+        label
+            |Username
+            input type="text" placeholder="Enter username" name="username"  autocomplte="username"
+        label
+            |Email
+            input type="email" placeholder="user@example.com" name="email" autocomplete="email"
+        label
+            |Password
+            input type="password" placeholder="Enter password" name="password"
+        label
+            |Confirm password
+            input type="password" placeholder="Confirm password" name="password_confirmation"
+        
+        input type="submit" value="Create account"
+
+        .actions
+            a.sign-up href="/login" Alredy have an account? Log in
