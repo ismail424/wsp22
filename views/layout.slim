@@ -16,13 +16,20 @@ html lang="en"
                 a href="/games" Games
               li
                 a href="/streamers" Streamers
-              li.right
-                a href="/login" Login
-                a#sign-up href="/register" Sign Up
-    .flash
-      - flash.each do |key, value|
-          div class="flash_#{key}"
-            |#{value}
+              - if session[:user_id]
+                li.right
+                  a href="/logout" Logout
+                  a#account href="/profile" Profile
+              - else
+                li.right
+                  a href="/login" Login
+                  a#sign-up href="/register" Sign Up
+
+    - if flash.length > 0
+      .flash
+        - flash.each do |key, value|
+            div class="flash_#{key}"
+              |#{value}
 
     ==yield
     script src="/js/script.js" 
@@ -33,6 +40,5 @@ html lang="en"
           ':35729/livereload.js?snipver=1"></' +
           'script>'
       );
-
 
 

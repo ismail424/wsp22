@@ -5,10 +5,10 @@
         h1 Register
         label
             |Username
-            input type="text" placeholder="Enter username" name="username"  autocomplte="username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')"
+            input type="text" placeholder="Enter username" name="username"  autocomplte="username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')" minlength="3" maxlength="20"
         label
             |Email
-            input type="email" placeholder="user@example.com" name="email" autocomplete="email" required="required"  pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"
+            input type="email" placeholder="user@example.com" name="email" autocomplete="email" required="required"  pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" minlength="3" maxlength="40"
         label
             |Password
             input type="password" placeholder="Enter password" name="password" required="required" maxlength="20" minlength="8"

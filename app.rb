@@ -14,6 +14,14 @@ set :port, 5000
 set :bind, '0.0.0.0'
 set :sessions, enable
 
+
+# Before filter to check if user is logged in
+before do
+    if session[:user_id]
+        @user = User.find(session[:user_id])
+    end
+end
+
 # CSS config for sass
 get('/css/style.css') do
     scss :'scss/style', :style => :compressed
@@ -24,5 +32,6 @@ get("/") do
     top_10_videogames = VideoGame.all(10)
     slim(:index, locals: { videogames: top_10_videogames })
 end
+
 
 

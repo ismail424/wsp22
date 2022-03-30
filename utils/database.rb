@@ -23,12 +23,13 @@ class DbModel
     def initialize(data)
         @id = data['id']
     end
-  
+
     def ==(other)
         return false if other.nil?
         @id == other.id
     end
 
+  
     def self.find(id)
         data = db.execute("SELECT * FROM #{table_name} WHERE id = ?", id).first
         data && self.new(data)
@@ -42,7 +43,7 @@ class DbModel
             results = db.execute("SELECT * FROM #{table_name}")
         end
         results.map {|data| self.new(data)}
-    end  
+    end 
 end
 
 class User < DbModel
@@ -50,27 +51,35 @@ class User < DbModel
     def self.table_name
         "Users"
     end
-   
+
     def initialize(data)
         super data
-        @profile_pic = data['profile_pic']
+        @profile_pic = data['profile_pic'] || "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(data['email'])}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{data['username']}/64"
         @username = data['username']
-        @password_hash = data['password_hash']
         @email = data['email']
-        @admin = data['admin']
+        @password_hash =  data['password_hash']
+        @admin = data['admin'] || false
     end
 
-    def authenticate(password)
-        BCrypt::Password.new(@password_hash) == password
+    def self.authenticate(password)
+        @password_hash == BCrypt::Password.new(password)
+    end
+
+    def self.create_user(username, password, email, profile_pic = "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64", admin =false)
+        session = db
+        return nil if session.execute("SELECT * FROM #{table_name} WHERE username = ?", username).first
+        
+
+        password_hash = BCrypt::Password.create(password)
+        user = session.execute("INSERT INTO #{table_name} (profile_pic, username, password_hash, email, admin) VALUES (?, ?, ?, ?, ?)", profile_pic, username, password_hash, email, admin ? 1 : 0)
+        new_user_id = session.last_insert_row_id
+
+        new_user_id
     end
 
     def self.find_by_username(username)
         data = db.execute("SELECT * FROM #{table_name} WHERE username = ?", username).first
         data && self.new(data)
-    end
-
-    def create_user
-        db.execute("INSERT INTO #{table_name} (profile_pic, username, password_hash, email, admin) VALUES (?, ?, ?, ?, ?)", @profile_pic, @username, @password_hash, @email, @admin)
     end
 
 end

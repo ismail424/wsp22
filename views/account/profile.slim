@@ -1,0 +1,9 @@
+.profile
+
+    img src="#{@user.profile_pic}" alt="Profile" height="50"
+    
+    h1.title
+        |#{@user.username}
+    .name = @user.username
+    .email = @user.email
+    
