@@ -1,20 +1,20 @@
 - @MyTitle = "Register"
 
 .register
-    form.register-form
+    form.register-form action="/account/register" method="post"
         h1 Register
         label
             |Username
-            input type="text" placeholder="Enter username" name="username"  autocomplte="username"
+            input type="text" placeholder="Enter username" name="username"  autocomplte="username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')"
         label
             |Email
-            input type="email" placeholder="user@example.com" name="email" autocomplete="email"
+            input type="email" placeholder="user@example.com" name="email" autocomplete="email" required="required"  pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"
         label
             |Password
-            input type="password" placeholder="Enter password" name="password"
+            input type="password" placeholder="Enter password" name="password" required="required" maxlength="20" minlength="8"
         label
             |Confirm password
-            input type="password" placeholder="Confirm password" name="password_confirmation"
+            input type="password" placeholder="Confirm password" name="password_confirmation" required="required" maxlength="20" minlength="8"
         
         input type="submit" value="Create account"
 

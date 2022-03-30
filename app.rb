@@ -1,14 +1,18 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require 'slim'
 require 'sassc'
-require_relative 'utils'
-require_relative 'database'
-require_relative 'users/users'
+
+
+# Require all the routes and utils files
+Dir[File.join(__dir__, 'utils', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'routes', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'utils', '*.rb')].each { |file| also_reload file }
+
 set :port, 5000
 set :bind, '0.0.0.0'
 set :sessions, enable
-also_reload 'database.rb', 'utils.rb', 'user/users.rb'
 
 # CSS config for sass
 get('/css/style.css') do

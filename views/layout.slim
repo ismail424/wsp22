@@ -19,10 +19,20 @@ html lang="en"
               li.right
                 a href="/login" Login
                 a#sign-up href="/register" Sign Up
-              
-
+    .flash
+      - flash.each do |key, value|
+          div class="flash_#{key}"
+            |#{value}
 
     ==yield
-    script src="js/script.js" 
+    script src="/js/script.js" 
+    javascript: 
+      document.write(
+        '<script src="http://' +
+          (location.host || '${1:localhost}').split(':')[0] +
+          ':35729/livereload.js?snipver=1"></' +
+          'script>'
+      );
+
 
 

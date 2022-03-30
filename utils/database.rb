@@ -43,8 +43,38 @@ class DbModel
         end
         results.map {|data| self.new(data)}
     end  
+end
+
+class User < DbModel
+    attr_reader :profile_pic, :username, :email, :admin
+    def self.table_name
+        "Users"
+    end
+   
+    def initialize(data)
+        super data
+        @profile_pic = data['profile_pic']
+        @username = data['username']
+        @password_hash = data['password_hash']
+        @email = data['email']
+        @admin = data['admin']
+    end
+
+    def authenticate(password)
+        BCrypt::Password.new(@password_hash) == password
+    end
+
+    def self.find_by_username(username)
+        data = db.execute("SELECT * FROM #{table_name} WHERE username = ?", username).first
+        data && self.new(data)
+    end
+
+    def create_user
+        db.execute("INSERT INTO #{table_name} (profile_pic, username, password_hash, email, admin) VALUES (?, ?, ?, ?, ?)", @profile_pic, @username, @password_hash, @email, @admin)
+    end
 
 end
+
 
 # A class for all database methods and objects
 class VideoGame  < DbModel

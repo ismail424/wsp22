@@ -1,16 +1,18 @@
 - @MyTitle = "Login"
 
 .login
-    form.login-form
+    form.login-form action="/account/login" method="post"
         h1 Log in
         label
             |Username
-            input type="text" placeholder="username" name="username" autocomplete="username" 
+            input type="text" placeholder="username" name="username" autocomplete="username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')"
         label
             |Password
-            input type="password" placeholder="password" autocomplete="password" name="password"
+            input type="password" placeholder="password" autocomplete="password" name="password" required="required" maxlength="20" minlength="8"
         input type="submit" value="Log in"
-
+        .error
+            - if @error
+                |{{ @error }}
         .actions
             a.forgot-password href="javascript:;" Forgot password?
             a.sign-up href="/register" Sign up

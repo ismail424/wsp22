@@ -41,6 +41,29 @@ background: #888;
 ::-webkit-scrollbar-thumb:hover {
 background: #888; 
 }
+.flash{
+    width: 100vw;
+    height: 5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    animation: flash 0.5s ease-in alternate;
+    div{
+        display: flex;
+        width: 100vw;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    &_error{
+        background-color: #f3d8da;
+        color: #692326;
+    }
+    &_success{
+        background-color: #d8f3da;
+        color: #3b8a3b;
+    }
+}
 
 body > header {
     display: flex;
@@ -338,7 +361,8 @@ body > header {
         }
         &[type=submit]:hover {
             cursor: pointer;
-            opacity: 0.9;
+            opacity: 0.8;
+            transition: opacity 0.2s;
         }
     }
 
@@ -370,4 +394,8 @@ body > header {
     100% {
         background-position: 0% 50%;
     }
+}
+@keyframes flash {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
