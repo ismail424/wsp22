@@ -62,7 +62,7 @@ class User < DbModel
     end
 
     def self.authenticate(password)
-        @password_hash == BCrypt::Password.new(password)
+        if BCrypt::Password.new(@password_hash) == password then true else false end
     end
 
     def self.create_user(username, password, email, profile_pic = "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64", admin =false)

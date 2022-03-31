@@ -20,3 +20,17 @@
 
         .actions
             a.sign-up href="/login" Alredy have an account? Log in
+javascript:
+    let password = document.querySelector('input[name="password"]')
+    , confirm_password = document.querySelector('input[name="password_confirmation"]');
+
+    function validatePassword(){
+    if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords don't match");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;

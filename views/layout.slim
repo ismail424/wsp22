@@ -19,7 +19,10 @@ html lang="en"
               - if session[:user_id]
                 li.right
                   a href="/logout" Logout
-                  a#account href="/profile" Profile
+                  a id="account" href="/profile"
+                    img src="#{@user.profile_pic}" alt="User Profile Pic"
+                    div
+                      span #{@user.username}
               - else
                 li.right
                   a href="/login" Login

@@ -5,10 +5,15 @@ end
 
 # Login form
 post("/account/login") do
-    @user = User.find_by_username(params[:username])
-    if @user && @user.authenticate(params[:password])
+    if params[:password].nil? || params[:username].nil?
+        flash[:error] = "Please enter a username and password"
+        redirect "/login"
+    end
+
+    user = User.find_by_username(params[:username])
+    if user && user.authenticate(params[:password])
         flash[:success] = "You are now logged in"
-        session[:user_id] = @user.id
+        session[:user_id] = user.id
         redirect "/"
     else
         flash[:error] = "Invalid username or password"

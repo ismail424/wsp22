@@ -3,8 +3,9 @@
 $colorButton: #05c46b;
 $dark_mode: #2f343f;
 $light_mode: #f5f5f5;
-$primary_color: #60b0f4;
+$primary_color: #388fdb;
 $secondary_color: #28bc68;
+$gradient_color: linear-gradient(-45deg,#e93a51, #d434da, #5a18d4, #1899cc, #23d567, #7bff00);
 $text-shadow: 1px 2px 5px $dark_mode;
 
 * {
@@ -79,25 +80,55 @@ body > header {
 
     nav>ul {
         display: flex;
+        align-items: center;
         list-style: none;
         gap: 1rem;
         padding: 0;
     }
     .right {
+        display: flex;
+        align-items: center;
         margin-left: auto;
         color: #fff;
         font-weight: 900;
         text-shadow: $text-shadow;
-        #sign-up, #account{
+        #sign-up{
             margin-left: 1rem;
             padding: .5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            background: linear-gradient(-45deg,#e93a51, #d434da, #5a18d4, #1899cc, #23d567, #7bff00);
+            background: $gradient_color;
             background-size: 600% 600%;
             animation: gradient 11s ease infinite;
-
-        }   
+        }  
+        #account{
+            display: flex;
+            align-items: center;
+            img {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                border: 1px solid #fff;
+                margin-right: .5rem;
+            }
+            #name{
+                font-size: 1.2rem;
+                font-weight: 900;
+                text-shadow: $text-shadow;
+                span{
+                    font-size: 1.2rem;
+                    font-weight: 900;
+                    text-shadow: $text-shadow;
+                }
+            }
+            margin-left: 1rem;
+            padding: .5rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            background: $gradient_color;
+            background-size: 600% 600%;
+            animation: gradient 11s ease infinite;
+        }
     }
     a {
         color: white;
@@ -382,6 +413,38 @@ body > header {
     }
 }
 
+
+.profile{
+    width: 100vw;
+    padding: 1vh 2vw;
+    &_info{
+        min-width: 15rem;
+        width: 20%;
+        height: auto;
+        display:flex;
+        gap: 0.5rem;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.4rem 0;
+        background-color: $secondary_color;
+        border-radius: 4px;
+        img{
+            width: 7rem;
+            height: 7rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        &_username{
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        &_email{
+            font-size: 1rem;
+            color: white;
+        }
+    }
+}
 
 // gradient animation
 @keyframes gradient {
