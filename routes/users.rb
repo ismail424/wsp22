@@ -4,12 +4,7 @@ get("/login") do
 end
 
 # Login form
-post("/account/login") do
-    if params[:password].nil? || params[:username].nil?
-        flash[:error] = "Please enter a username and password"
-        redirect "/login"
-    end
-
+post("/login") do
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
         flash[:success] = "You are now logged in"
@@ -17,6 +12,7 @@ post("/account/login") do
         redirect "/"
     else
         flash[:error] = "Invalid username or password"
+        session[:username] = params[:username]
         redirect "/login"
     end
 end
@@ -27,36 +23,23 @@ get("/register") do
 end
 
 # Register form
-post("/account/register") do
-    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-    username = params[:username].gsub(/[^|a-z0-9]+/,'')[0..19]
-    email = params[:email][0..39]
-    password = params[:password][0..19]
-    password_confirmation = params[:password_confirmation][0..19]
-
-    if (username.length < 3)
-        flash[:error] = "Username must be at least 3 characters long"
-        redirect "/register"
-    end
-
-    if password != password_confirmation
-        flash[:error] = "Passwords do not match"
-        redirect "/register"
-    end
-
-    unless email =~ VALID_EMAIL_REGEX 
-        flash[:error] = "Invalid email address"
+post("/register") do
+    
+    begin
+        validation = User.validate(params)
+    rescue => e
+        flash[:error] = e
         redirect "/register"
     end
     
+    user_id  = User.create_user(validation[:username], validation[:password], validation[:email])
 
-    user_id  = User.create_user(username, password, email)
-    
-    if user_id != nil
+    if !user_id.nil?
         session[:user_id] = user_id
         redirect "/"
     else
-        flash[:error] = "Error creating user"
+        flash[:error] = "Username or email already exists"
+        session[:old_data] = params
         redirect "/register"
     end
 
@@ -69,10 +52,60 @@ get("/profile") do
     slim(:"account/profile")
 end
 
+get("/profile/edit") do
+    slim(:"account/edit")
+end
+
+post("/profile/edit") do
+    
+    begin
+        validation = User.validate(params)
+    rescue => e
+        flash[:error] = e
+        redirect "/profile/edit"
+    end
+
+    check_username, check_email = User.find_by_username(validation[:username]), User.find_by_email(validation[:email])
+    unless check_username.nil? || check_username.id == @user.id
+        flash[:error] = "Username already exists"
+        redirect "/profile/edit"
+    end
+    unless check_email.nil? || check_email.id == @user.id
+        flash[:error] = "Email already exists"
+        redirect "/profile/edit"
+    end
+
+
+    if validation[:profile_pic] != ""
+        filename = "#{@user.id}_#{validation[:profile_pic][:filename].to_s.gsub(/[^0-9A-Za-z.\-]/, '')}"
+        path = "/img/profile_pics/#{filename}"
+        full_path = File.join("public", path)
+
+        File.open(full_path, 'wb') {|f| f.write validation[:profile_pic][:tempfile].read }
+        validation[:profile_pic] = path
+        
+        @user.delete_profile_pic
+    end
+    
+    if validation[:password] != "" 
+        validation[:password_hash] = BCrypt::Password.create(validation[:password])
+    end
+    
+    validation.delete(:password_confirmation)
+    validation.delete(:password)
+    
+    @user.update(validation)
+    
+    flash[:success] = "Profile updated"
+    redirect "/profile"
+
+  
+end
+
 
 # Logout
 get("/logout") do
     session.clear
-    flash[:success] = "You are now logged out"
+    flash[:warning] = "You are now logged out"
     redirect "/"
 end

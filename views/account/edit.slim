@@ -1,0 +1,57 @@
+.edit_profile 
+    .edit_profile_form
+        h1 Edit Profile
+        form action="/profile/edit" method="post" enctype="multipart/form-data"
+            .form_group
+                label for="profile_pic" Profile Pic
+                img src="#{@user.profile_pic}" alt="Profile Pic"  id="profile_pic_src"
+                input type="file" name="profile_pic" id="profile_pic" accept="image/*"  
+            .form_group
+                label for="username" Username
+                input type="text" name="username" id="username" value="#{@user.username}" placeholder="Username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')" minlength="3" maxlength="20"
+            .form_group
+                label for="email" Email
+                input type="text" name="email" id="email" value="#{@user.email}" placeholder="Email" required="required" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"  maxlength="40"
+            .form_group
+                label for="password" Password
+                input type="password" name="password" id="password" placeholder="Leave blank to keep current password" maxlength="20" minlength="8"
+            .form_group.hidden
+                label for="password_confirmation" Password Confirmation 
+                input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" maxlength="20" minlength="8"
+
+            input type="submit" value="Update Profile"
+
+javascript:
+    let password = document.querySelector('input[name="password"]')
+    , confirm_password = document.querySelector('input[name="password_confirmation"]'), profile_pic = document.querySelector('input[name="profile_pic"]'),
+    img_src = document.getElementById('profile_pic_src');
+    
+    let validatePassword = () => {
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords don't match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+    let showPassword = () => {
+        console.log('show password');
+        if (password.value.length > 0){
+            confirm_password.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+            confirm_password.parentElement.classList.remove("hidden");
+        } else {
+            confirm_password.removeAttribute('required');
+            password.removeAttribute('required');
+            confirm_password.parentElement.classList.add("hidden");
+        }
+    }
+
+    profile_pic.onchange = evt => {
+    const [file] = profile_pic.files
+        if (file) {
+            img_src.src = URL.createObjectURL(file)
+        }
+    }
+    password.onchange = validatePassword;
+    password.onkeyup = showPassword;
+    confirm_password.onkeyup = validatePassword;

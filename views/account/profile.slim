@@ -3,4 +3,7 @@
         img src="#{@user.profile_pic}" alt="Profile Picture"
         .profile_info_username = @user.username
         .profile_info_email = @user.email
-        
+        a.profile_info_edit href="/profile/edit"
+            | Edit Profile
+            i.material-icons
+                | edit

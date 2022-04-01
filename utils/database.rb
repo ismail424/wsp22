@@ -44,6 +44,23 @@ class DbModel
         end
         results.map {|data| self.new(data)}
     end 
+
+	def gen_update_query(vars)
+		out = vars.join " = ?, "
+		out += " = ?"
+	end
+
+    def apply_filter(query, filter)
+		if filter != "" then query += " WHERE #{filter}" end
+		query
+	end
+
+    def update(data, filter="", *args) 
+        q = "UPDATE #{table_name} SET #{self.gen_update_query(data.keys)} WHERE id = #{@id}" 
+        q = self.apply_filter(q, filter)
+        db.query(q, *data.values, *args)
+    end
+
 end
 
 class User < DbModel
@@ -54,27 +71,30 @@ class User < DbModel
 
     def initialize(data)
         super data
-        @profile_pic = data['profile_pic'] || "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(data['email'])}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{data['username']}/64"
+        @profile_pic  = data['profile_pic'] || defautl_profile_pic 
         @username = data['username']
         @email = data['email']
-        @password_hash =  data['password_hash']
+        @password_hash = BCrypt::Password.new(data['password_hash'])
         @admin = data['admin'] || false
     end
 
-    def self.authenticate(password)
-        if BCrypt::Password.new(@password_hash) == password then true else false end
+    def authenticate(password)
+        @password_hash == password
+    end
+
+    def defautl_profile_pic
+        "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{@username}/64"
     end
 
     def self.create_user(username, password, email, profile_pic = "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64", admin =false)
         session = db
         return nil if session.execute("SELECT * FROM #{table_name} WHERE username = ?", username).first
-        
+        return nil if session.execute("SELECT * FROM #{table_name} WHERE email = ?", email).first
 
         password_hash = BCrypt::Password.create(password)
         user = session.execute("INSERT INTO #{table_name} (profile_pic, username, password_hash, email, admin) VALUES (?, ?, ?, ?, ?)", profile_pic, username, password_hash, email, admin ? 1 : 0)
-        new_user_id = session.last_insert_row_id
-
-        new_user_id
+        
+        session.last_insert_row_id
     end
 
     def self.find_by_username(username)
@@ -82,6 +102,38 @@ class User < DbModel
         data && self.new(data)
     end
 
+    def self.find_by_email(email)
+        data = db.execute("SELECT * FROM #{table_name} WHERE email = ?", email).first
+        data && self.new(data)
+    end
+
+    def self.validate( data )
+ 
+        case data
+            when data[:username]
+                raise "Username must be at least 3 characters long" if data[:username].length < 3
+                data[:username] = data[:username].gsub(VALID_USERNAME_REGEX,'')[0..13]
+
+            when data[:email]
+                raise "Invalid email address" unless data[:email] =~ VALID_EMAIL_REGEX
+                data[:email] = data[:email][0..39]
+            when data[:password]
+                raise "Password must be at least 8 characters long" if data[:password].length < 7
+                if data[:password_confirmation] 
+                    raise "Passwords do not match" if data[:password] != data[:password_confirmation]
+                end
+                data[:password] = data[:password][0..19]
+        end
+
+        data
+    end
+
+    def delete_profile_pic
+        full_path = File.join("public", @profile_pic)
+        File.delete(full_path) if File.exist?(full_path)
+        @profile_pic = defautl_profile_pic
+        db.execute("UPDATE #{table_name} SET profile_pic = ? WHERE id = ?", @profile_pic, @id)
+    end
 end
 
 
