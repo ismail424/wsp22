@@ -88,8 +88,8 @@ class User < DbModel
 
     def self.create_user(username, password, email, profile_pic = "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64", admin =false)
         session = db
-        return nil if session.execute("SELECT * FROM #{table_name} WHERE username = ?", username).first
-        return nil if session.execute("SELECT * FROM #{table_name} WHERE email = ?", email).first
+        return nil if find_by_username(username)
+        return nil if find_by_email(email)
 
         password_hash = BCrypt::Password.create(password)
         user = session.execute("INSERT INTO #{table_name} (profile_pic, username, password_hash, email, admin) VALUES (?, ?, ?, ?, ?)", profile_pic, username, password_hash, email, admin ? 1 : 0)
@@ -98,7 +98,7 @@ class User < DbModel
     end
 
     def self.find_by_username(username)
-        data = db.execute("SELECT * FROM #{table_name} WHERE username = ?", username).first
+        data = db.execute("SELECT * FROM #{table_name} WHERE LOWER(username) = ?", username.downcase).first
         data && self.new(data)
     end
 

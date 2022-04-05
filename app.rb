@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/flash'
+require 'securerandom'
+require 'rmagick'
 require 'slim'
 require 'sassc'
 
@@ -13,12 +15,33 @@ Dir[File.join(__dir__, 'utils', '*.rb')].each { |file| also_reload file }
 set :port, 5000
 set :bind, '0.0.0.0'
 set :sessions, enable
+include Utils
 
-# Before filter to check if user is logged in
+auth_needed = %w[/profile/edit /profile]
+ignored_paths = %w[/style.css /favicon.ico /auth-needed]
+auth_paths = %w[/login /register /auth-needed]
+
+# Before the http requests, check if user is logged in
 before do
-    if session[:user_id]
-        @user = User.find(session[:user_id])
+    # Stroing the user in the session if he is logged in
+    if session[:user_id] && session[:user].nil?
+        session[:user] = User.find(session[:user_id])
+        @user = session[:user]
+    elsif session[:user_id] && session[:user]
+        @user = session[:user]
     end
+
+    status temp_session(:status_code) if session[:status_code]
+    return if ignored_paths.include? request.path_info
+
+    if !session[:user_id] && auth_needed.map { |path| request.path_info.start_with?(path) }.any?
+        puts "User not logged in, redirecting to login page"
+        session[:return_to] = request.fullpath
+        session[:status_code] = 403
+        redirect '/auth-needed'
+    end
+
+    (auth_paths.include? request.path_info) || session.delete(:return_to)
 end
 
 # CSS config for sass

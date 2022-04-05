@@ -6,9 +6,9 @@
         label
             |Username
             - if session[:username]
-                input type="text" value="#{session[:username]}" placeholder="username" name="username" autocomplete="username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')"
+                input type="text" value="#{session[:username]}" placeholder="username" autocapitalize="off" name="username" autocomplete="username" required="required" onkeyup="if (/[^|A-Za-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|A-Za-z0-9]+/g,'')"
             - else
-                input type="text" placeholder="username" name="username" autocomplete="username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')"
+                input type="text" placeholder="username" name="username" autocapitalize="off"  autocomplete="username" required="required" onkeyup="if (/[^|A-Za-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|A-Za-z0-9]+/g,'')"
         label
             |Password
             input type="password" placeholder="password" autocomplete="password" name="password" required="required" maxlength="20" minlength="8"

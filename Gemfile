@@ -4,8 +4,6 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# gem "rails"
-
 gem "sinatra", "~> 2.1"
 gem "sinatra-contrib", "~> 2.1"
 gem "puma", "~> 5.6"
@@ -15,3 +13,5 @@ gem "sqlite3", "~> 1.4"
 gem "slim", "~> 4.1"
 gem "rufo", "~> 0.13.0"
 gem "sinatra-flash", "~> 0.3.0"
+gem "securerandom", "~> 0.2.0"
+gem "rmagick", "~> 4.2"

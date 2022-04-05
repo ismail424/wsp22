@@ -43,7 +43,6 @@ post("/register") do
         redirect "/register"
     end
 
-
 end
 
 
@@ -57,7 +56,6 @@ get("/profile/edit") do
 end
 
 post("/profile/edit") do
-    
     begin
         validation = User.validate(params)
     rescue => e
@@ -76,14 +74,24 @@ post("/profile/edit") do
     end
 
 
-    if validation[:profile_pic] != ""
-        filename = "#{@user.id}_#{validation[:profile_pic][:filename].to_s.gsub(/[^0-9A-Za-z.\-]/, '')}"
-        path = "/img/profile_pics/#{filename}"
-        full_path = File.join("public", path)
-
-        File.open(full_path, 'wb') {|f| f.write validation[:profile_pic][:tempfile].read }
-        validation[:profile_pic] = path
+    if validation[:profile_pic]
+        # File upload
+        filename = "#{@user.id}_#{SecureRandom.uuid}.jpg"
         
+        # Save profilepic route to database
+        path = "/img/profile_pics/#{filename}"
+
+        # Save profilepic to public folder /img/profile_pics
+        full_path = File.join("public", path)
+        img_data = validation[:profile_pic][:tempfile].read
+        image = Magick::Image.from_blob(img_data).first
+        image.format = 'jpeg'
+        File.open(full_path, 'wb') do |f| 
+            image.resize_to_fit(128, 128).write(f)
+        end
+        validation[:profile_pic] = path
+
+        # Delete old profile pic
         @user.delete_profile_pic
     end
     
@@ -98,8 +106,6 @@ post("/profile/edit") do
     
     flash[:success] = "Profile updated"
     redirect "/profile"
-
-  
 end
 
 
