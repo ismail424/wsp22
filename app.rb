@@ -24,11 +24,8 @@ auth_paths = %w[/login /register /auth-needed]
 # Before the http requests, check if user is logged in
 before do
     # Stroing the user in the session if he is logged in
-    if session[:user_id] && session[:user].nil?
-        session[:user] = User.find(session[:user_id])
-        @user = session[:user]
-    elsif session[:user_id] && session[:user]
-        @user = session[:user]
+    if session[:user_id]
+        @user = User.find(session[:user_id])
     end
 
     status temp_session(:status_code) if session[:status_code]

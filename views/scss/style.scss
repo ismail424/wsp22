@@ -115,6 +115,7 @@ body > header {
                 border-radius: 50%;
                 border: 1px solid #fff;
                 margin-right: .5rem;
+                object-fit: cover;
             }
             #name{
                 font-size: 1.2rem;
@@ -292,7 +293,7 @@ body > header {
         .game_content_header {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: minmax(auto, 6rem) minmax(20px, 40px) minmax(20px, 40px) minmax(20px, 40px);
+            grid-template-rows: auto minmax(20px, 50px) minmax(20px, 50px) minmax(20px, 50px);
             gap: 0px 0px;
             grid-auto-flow: row;
             grid-template-areas: "game_title game_title game_title" "game_realse_date game_realse_date game_realse_date" "game_genre game_genre game_genre" "game_platform game_platform game_platform";

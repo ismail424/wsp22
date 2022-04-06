@@ -8,7 +8,7 @@
                 input type="file" name="profile_pic" id="profile_pic" accept="image/*"  
             .form_group
                 label for="username" Username
-                input type="text" name="username" id="username" value="#{@user.username}" placeholder="Username" required="required" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')" minlength="3" maxlength="20"
+                input type="text" name="username" id="username" value="#{@user.username}" placeholder="Username" required="required" onkeyup="if (/[^|A-Za-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|A-Za-z0-9]+/g,'')" minlength="3" maxlength="20"
             .form_group
                 label for="email" Email
                 input type="text" name="email" id="email" value="#{@user.email}" placeholder="Email" required="required" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"  maxlength="40"
