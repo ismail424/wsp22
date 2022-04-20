@@ -134,8 +134,13 @@ class User < DbModel
         @profile_pic = defautl_profile_pic
         db.execute("UPDATE #{table_name} SET profile_pic = ? WHERE id = ?", @profile_pic, @id)
     end
-end
 
+
+    def get_reviews()
+        Review.all(@id, limit)
+    end
+
+end
 
 # A class for all database methods and objects
 class VideoGame  < DbModel
@@ -205,7 +210,7 @@ class VideoGame  < DbModel
     
     def get_rating_avg
         avg_rating = db.execute("SELECT AVG(rating) AS average_rating FROM Rating WHERE game_id = ?", @id).first['average_rating']
-        avg_rating.nil? ? 0 : avg_rating
+        avg_rating.nil? ? 0 : avg_rating.round(1)
     end
 end
 
@@ -272,9 +277,26 @@ class Image < DbModel
 
 end
 
-class Rating < DbModel
-    attr_reader :rating
+class Comment < DbModel
 
+    attr_reader :titel, :body, :game_id
+
+    def self.table_name
+        'Comments'
+    end
+
+    def initialize(data)
+        super data
+        @titel = data['titel']
+        @body = data['body']
+        @game_id = data['game_id']
+    end
+
+end
+
+class Rating < DbModel
+
+    attr_reader :rating, :game_id
 
     def self.table_name
         'Rating'
@@ -283,6 +305,23 @@ class Rating < DbModel
     def initialize(data)
         super data
         @rating = data['rating']
+        @game_id = data['game_id']
+    end
+
+end
+
+
+class Review
+
+    attr_reader :titel, :body, :game_id, :rating, :user_id
+
+    def initialize(data)
+        super data
+        @rating = data['rating']
+        @titel = data['titel']
+        @body = data['body']
+        @game_id = data['game_id']
+        @user_id = data['user_id']
     end
 
 end

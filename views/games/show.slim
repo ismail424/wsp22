@@ -20,22 +20,18 @@ link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome
       .game_description = videogame.description
       
       - if session[:user_id]
-        .game_review
-          form.game_review_rating action="/games/#{videogame.id}/reviews" method="post"
-            p = "Add your rating: "
-            .game_review_rating_star
-              - (0..9).each do |i|
-                span.fa.fa-star id="#{i}"
-              small#star_count = "0"
-            button id="add_rating" = "Add" 
-          .game_review_text
-            p = "Add your review"
-            form.game_review_text_form
-              input.review_input type="text" name="review_text" placeholder="Write your review here..."
-              input.review_submit type="submit" value="Submit"
+        form.game_review action="/games/#{videogame.id}/review/add " method="post"
+          p = "Add your rating: "
+          input#rating_value name="rating" type="hidden" value="1"
+          .game_review_star
+            - (0..9).each do |i|
+              span.fa.fa-star id="#{i}"
+            small#star_count = "0"
+          textarea  name="review_text" placeholder="Write your review here..."
+          button type="submit" Submit
         script src="/js/review.js" type="text/javascript"
       - else 
         .review_login
-          h1 = "Please login to leave a review and rate this game!"
+          h1 = "Please login to leave a review."
           a href="/login" = "Login"
           

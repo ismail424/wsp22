@@ -11,9 +11,20 @@ get('/games/:id') do
     slim(:"games/show", locals: { videogame: videogame })
 end
 
+post('/games/:id/review/add') do
+    if session[:user_id].nil?
+        unauthorized
+    end
 
-post('/games/:id/rating/add/:rating') do
+    not_found unless params[:id].to_i.positive?
+    id = params[:id].to_i
+    videogame = VideoGame.find(id)
+    not_found unless videogame
 
-    puts "params are #{params}"
-    "params are #{params}"
+    user = User.find(session[:user_id])
+    not_found unless user
+
+    rating = Rating.new(videogame.id, user.id, params[:rating].to_f)
+    flash[:success] = "Rating successfully added!"
+    redirect "/games/#{videogame.id}"
 end
