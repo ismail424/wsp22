@@ -10,3 +10,10 @@ get('/games/:id') do
     not_found unless videogame
     slim(:"games/show", locals: { videogame: videogame })
 end
+
+
+post('/games/:id/rating/add/:rating') do
+
+    puts "params are #{params}"
+    "params are #{params}"
+end

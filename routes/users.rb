@@ -56,6 +56,7 @@ get("/profile/edit") do
 end
 
 post("/profile/edit") do
+
     begin
         validation = User.validate(params)
     rescue => e

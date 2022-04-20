@@ -6,7 +6,6 @@ require 'rmagick'
 require 'slim'
 require 'sassc'
 
-
 # Require all the routes and utils files
 Dir[File.join(__dir__, 'utils', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'routes', '*.rb')].each { |file| require file }

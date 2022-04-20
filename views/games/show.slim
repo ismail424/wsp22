@@ -1,3 +1,4 @@
+link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 .game_show_container
   
   .background_img style="background-image: url('#{videogame.images.last.src.gsub('t_thumb', 't_screenshot_big')}');"
@@ -10,9 +11,31 @@
       .game_realse_date = videogame.release_date
       .game_genre = videogame.genres.map { |genre| genre.name }.join(', ')
       .game_platform = videogame.platforms.map { |platform| platform.name }.join(', ')
+      small.rating
+        img#star src="/img/star.svg" height="36" width="36"
+        span.rating_avg = "#{videogame.rating_avg} / 10" 
 
     .game_content_body
       h1 = "Description:"
       .game_description = videogame.description
-      .game_review
-
+      
+      - if session[:user_id]
+        .game_review
+          form.game_review_rating action="/games/#{videogame.id}/reviews" method="post"
+            p = "Add your rating: "
+            .game_review_rating_star
+              - (0..9).each do |i|
+                span.fa.fa-star id="#{i}"
+              small#star_count = "0"
+            button id="add_rating" = "Add" 
+          .game_review_text
+            p = "Add your review"
+            form.game_review_text_form
+              input.review_input type="text" name="review_text" placeholder="Write your review here..."
+              input.review_submit type="submit" value="Submit"
+        script src="/js/review.js" type="text/javascript"
+      - else 
+        .review_login
+          h1 = "Please login to leave a review and rate this game!"
+          a href="/login" = "Login"
+          

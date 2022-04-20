@@ -139,7 +139,7 @@ end
 
 # A class for all database methods and objects
 class VideoGame  < DbModel
-    attr_reader :name, :description, :release_date, :genres, :platforms, :images
+    attr_reader :name, :description, :release_date, :genres, :platforms, :images, :rating_avg
     
     def self.table_name
         'VideoGames'
@@ -153,6 +153,7 @@ class VideoGame  < DbModel
         @genres = self.get_genres
         @platforms = self.get_platforms
         @images = self.get_images
+        @rating_avg = self.get_rating_avg
     end
 
     def self.search(name)
@@ -200,6 +201,11 @@ class VideoGame  < DbModel
             result << Image.find(row['id'])
         end
         result
+    end
+    
+    def get_rating_avg
+        avg_rating = db.execute("SELECT AVG(rating) AS average_rating FROM Rating WHERE game_id = ?", @id).first['average_rating']
+        avg_rating.nil? ? 0 : avg_rating
     end
 end
 
@@ -262,6 +268,21 @@ class Image < DbModel
     def initialize(data)
         super data
         @src = data['src']
+    end
+
+end
+
+class Rating < DbModel
+    attr_reader :rating
+
+
+    def self.table_name
+        'Rating'
+    end
+
+    def initialize(data)
+        super data
+        @rating = data['rating']
     end
 
 end

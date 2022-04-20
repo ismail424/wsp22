@@ -14,6 +14,10 @@ div.container
                     .caption
                         p.name = game.name
                         small.subtitle = game.genres.map(&:name).join(', ')
+                        small.rating
+                            img#star src="/img/star.svg" height="16" width="16"
+                            span.rating_avg = game.rating_avg
+           
     - if videogames.size < 70
         button onclick='window.location.replace("/games?limit=all")' = "Load All Games"
 
