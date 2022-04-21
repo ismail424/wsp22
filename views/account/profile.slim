@@ -7,3 +7,25 @@
             | Edit Profile
             i.material-icons
                 | edit
+    - if @user.reviews != []
+      .reviews
+        - @user.reviews.each do |review|
+          .review
+            .review_header
+              img src="#{User.find(review.user_id).profile_pic}" height="36" width="36"
+              h3 = User.find(review.user_id).username
+              small.review_rating = "#{review.rating.to_i} / 10"
+            .review_body
+              = review.comment
+            - if @user.id == review.user_id
+                .review_button 
+                    a.review_button_edit href="/games/#{review.game_id}/review/edit/#{review.id}"
+                        | Edit
+                    a.review_button_delete href="/games/#{review.game_id}/review/delete/#{review.id}"
+                        | Delete
+
+    - else
+      br 
+      h1 = "No reviews yet."
+      br 
+      br

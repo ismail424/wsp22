@@ -458,6 +458,123 @@ body > header {
     color: orange !important;
 }
 
+.reviews{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    .review{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        border: $primary_color 1px solid;
+        background-color: $primary_color;
+        color: white;
+        padding: 0.9rem;
+        border-radius: 5px;
+        &_header{
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            align-items: center;
+            h3{
+                margin: 0;
+                text-transform: capitalize;
+            }
+            img {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            small{
+                // Algin to right
+                margin-left: auto
+            }
+        }
+        &_body{
+            background-color: #fff;
+            color : #262a32;
+            font-size: 0.9rem;
+            font-weight: 900;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        &_button{ 
+            display: flex;
+            flex-direction:  row;
+            gap: 0.5rem;
+            border-radius: 5px;
+            &:hover{
+                cursor: pointer;
+                opacity: 0.6;
+                transition: opacity 0.6s;
+            }
+            a {
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                color: white;
+                font-size: 1rem;
+                font-weight: bold;
+            }
+            &_edit{
+                background-color: orange;
+            }
+            &_delete{
+                background-color: red;
+            }
+        }
+    }
+}
+
+.edit_review {
+    margin: 5rem auto;
+    background-color: $primary_color;
+    color: white;
+    padding: 2rem 1rem;
+    border-radius: 5px;
+    max-width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+        font-size: 1.5rem;
+        font-weight: 900;
+        margin: 0;
+    }
+    &_rating_value{
+        display:  flex;
+        flex-direction: row;
+        gap: 0.3rem;
+        align-items: center;
+    }
+    
+    input {
+        width: 80px;
+        height: 50px;
+        padding: 0.5rem;
+        border: none;
+        text-align: center;
+    }
+    textarea{
+        padding: 0.5rem;
+    }
+    button{
+        padding: 0.5rem 1rem;
+        font-size: large;
+        font-weight: bold;
+        border: none;
+        color: #262a32;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+}
 
 
 .login, .register {
@@ -540,6 +657,10 @@ body > header {
 .profile{
     width: 100vw;
     padding: 3vh 2vw;
+    display: flex;
+    flex-direction: row;
+    gap : 1rem;
+
     &_info{
         min-width: 15rem;
         width: 20%;

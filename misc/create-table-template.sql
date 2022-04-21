@@ -8,26 +8,15 @@ CREATE TABLE `Users`(
     
 );
 
-CREATE TABLE `Comments`(
-    `id` integer primary key autoincrement,
-    `titel` TEXT NOT NULL,
-    `body` TEXT NOT NULL,
-    `user_id` INT NOT NULL,
-    `game_id` INT NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`),
-    FOREIGN KEY (`game_id`) REFERENCES `VideoGames`(`id`)
+CREATE TABLE [Review](  
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    rating FLOAT, 
+    comment TEXT,
+    user_id INTEGER,
+    game_id INTEGER,
+    FOREIGN KEY(user_id) REFERENCES Users(id),
+    FOREIGN KEY(game_id) REFERENCES VideoGames(id)
 );
-
-CREATE TABLE `Rating`(
-    `id` integer primary key autoincrement ,
-    `rating` INT NOT NULL,
-    `user_id` INT NOT NULL,
-    `game_id` INT NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`) ,
-    FOREIGN KEY (`game_id`) REFERENCES `VideoGames`(`id`) 
-
-);
-
 
 CREATE TABLE `Streamers`(
     `id` integer primary key autoincrement,

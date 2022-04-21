@@ -35,15 +35,30 @@ class DbModel
         data && self.new(data)
     end
   
-    def self.all(limit = nil)
+    def self.all(limit = nil, id= nil )
         results = []
-        if limit
-            results = db.execute("SELECT * FROM #{table_name} LIMIT #{limit}")
-        else
-            results = db.execute("SELECT * FROM #{table_name}")
+        query = "SELECT * FROM #{table_name}"
+
+        if id != nil
+            query += " WHERE id = #{id}"
         end
-        results.map {|data| self.new(data)}
+
+        if limit != nil
+            query += " LIMIT #{limit}"
+        end
+
+        db.execute(query).each do |row|
+            results << self.new(row)
+        end
+
+        results
     end 
+
+    def self.create(data)
+        q = "INSERT INTO #{table_name} (#{data.keys.join(", ")}) VALUES (#{data.keys.map { |key| "?" }.join(", ")})"
+        db.query(q, *data.values)
+        self.find(db.last_insert_row_id)
+    end
 
 	def gen_update_query(vars)
 		out = vars.join " = ?, "
@@ -61,10 +76,15 @@ class DbModel
         db.query(q, *data.values, *args)
     end
 
+    def delete
+        q = "DELETE FROM #{table_name} WHERE id = #{@id}"
+        db.query(q)
+    end
+
 end
 
 class User < DbModel
-    attr_reader :profile_pic, :username, :email, :admin
+    attr_reader :profile_pic, :username, :email, :admin, :reviews
     def self.table_name
         "Users"
     end
@@ -75,7 +95,8 @@ class User < DbModel
         @username = data['username']
         @email = data['email']
         @password_hash = BCrypt::Password.new(data['password_hash'])
-        @admin = data['admin'] || false
+        if data['admin'] == 1 then @admin = true else @admin = false end
+        @reviews = self.get_reviews
     end
 
     def authenticate(password)
@@ -135,16 +156,21 @@ class User < DbModel
         db.execute("UPDATE #{table_name} SET profile_pic = ? WHERE id = ?", @profile_pic, @id)
     end
 
+    private def get_reviews
+        result = []
 
-    def get_reviews()
-        Review.all(@id, limit)
+        db.execute("SELECT * FROM Review WHERE user_id = ?", @id).each do |row|
+            result << Review.new(row)
+        end
+
+        result
+
     end
-
 end
 
 # A class for all database methods and objects
 class VideoGame  < DbModel
-    attr_reader :name, :description, :release_date, :genres, :platforms, :images, :rating_avg
+    attr_reader :name, :description, :release_date, :genres, :platforms, :images, :rating_avg, :reviews
     
     def self.table_name
         'VideoGames'
@@ -159,6 +185,7 @@ class VideoGame  < DbModel
         @platforms = self.get_platforms
         @images = self.get_images
         @rating_avg = self.get_rating_avg
+        @reviews = self.get_reviews
     end
 
     def self.search(name)
@@ -208,10 +235,22 @@ class VideoGame  < DbModel
         result
     end
     
-    def get_rating_avg
-        avg_rating = db.execute("SELECT AVG(rating) AS average_rating FROM Rating WHERE game_id = ?", @id).first['average_rating']
+    private def get_rating_avg
+        avg_rating = db.execute("SELECT AVG(rating) AS average_rating FROM Review WHERE game_id = ?", @id).first['average_rating']
         avg_rating.nil? ? 0 : avg_rating.round(1)
+    end 
+
+    private def get_reviews
+        result = []
+
+        db.execute("SELECT * FROM Review WHERE game_id = ?", @id).each do |row|
+            result << Review.new(row)
+        end
+
+        result
+
     end
+
 end
 
 # Streamers class
@@ -277,51 +316,20 @@ class Image < DbModel
 
 end
 
-class Comment < DbModel
+class Review < DbModel
 
-    attr_reader :titel, :body, :game_id
-
+    attr_reader :rating, :comment, :user_id, :game_id
+    
     def self.table_name
-        'Comments'
-    end
-
-    def initialize(data)
-        super data
-        @titel = data['titel']
-        @body = data['body']
-        @game_id = data['game_id']
-    end
-
-end
-
-class Rating < DbModel
-
-    attr_reader :rating, :game_id
-
-    def self.table_name
-        'Rating'
+        'Review'
     end
 
     def initialize(data)
         super data
         @rating = data['rating']
-        @game_id = data['game_id']
-    end
-
-end
-
-
-class Review
-
-    attr_reader :titel, :body, :game_id, :rating, :user_id
-
-    def initialize(data)
-        super data
-        @rating = data['rating']
-        @titel = data['titel']
-        @body = data['body']
-        @game_id = data['game_id']
+        @comment = data['comment']
         @user_id = data['user_id']
+        @game_id = data['game_id']
     end
 
 end

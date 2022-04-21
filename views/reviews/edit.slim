@@ -1,0 +1,9 @@
+
+form.edit_review action="/games/#{review.game_id}/review/edit/#{review.id}" method="post"
+    p = "Edit your review:"
+    .edit_review_rating_value
+        label name="rating" = "Rating:" 
+        input name="rating" type="number" min="1" max="10" step="1" required="required" value="#{review.rating}"
+    textarea  name="review_text" placeholder="Write your review here..." #{review.comment} 
+    button type="submit" Submit
+script src="/js/review.js" type="text/javascript"

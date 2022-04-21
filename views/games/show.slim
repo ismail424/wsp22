@@ -19,9 +19,9 @@ link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome
       h1 = "Description:"
       .game_description = videogame.description
       
-      - if session[:user_id]
+      - if session[:user_id]  
         form.game_review action="/games/#{videogame.id}/review/add " method="post"
-          p = "Add your rating: "
+          p = "Add your review: "
           input#rating_value name="rating" type="hidden" value="1"
           .game_review_star
             - (0..9).each do |i|
@@ -29,9 +29,33 @@ link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome
             small#star_count = "0"
           textarea  name="review_text" placeholder="Write your review here..."
           button type="submit" Submit
-        script src="/js/review.js" type="text/javascript"
+        script src="/js/review.js" type="text/javascript" 
       - else 
         .review_login
           h1 = "Please login to leave a review."
           a href="/login" = "Login"
           
+      - if videogame.reviews != []
+        h1 = "Reviews:"
+        .reviews
+          - videogame.reviews.each do |review|
+            .review
+              .review_header
+                img src="#{User.find(review.user_id).profile_pic}" height="36" width="36"
+                h3 = User.find(review.user_id).username
+                small.review_rating = "#{review.rating.to_i} / 10"
+              .review_body
+                = review.comment
+              - if session[:user_id] == review.user_id || @user.admin == true
+                .review_button
+                  a.review_button_edit href="/games/#{review.game_id}/review/edit/#{review.id}"
+                      | Edit
+                  a.review_button_delete href="/games/#{review.game_id}/review/delete/#{review.id}"
+                      | Delete
+              
+      - else
+        br 
+        h1 = "No reviews yet."
+        br 
+        br 
+
