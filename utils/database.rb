@@ -2,6 +2,11 @@ require 'bcrypt'
 require 'sqlite3'
 require_relative 'utils'
 
+#
+# Connects to the database
+#
+# @return [SQLite3::Database] The connection to the database
+#
 def db()
     database = SQLite3::Database.new 'db/database.db'
     database.results_as_hash = true

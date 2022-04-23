@@ -1,4 +1,14 @@
-
+# Atemps to add a review to a game
+#
+# @param :rating [Integer] The rating of the game
+# @param :comment [String] The comment of the game
+# @param :user_id [Integer] The id of the user who added the review
+# @param :game_id [Integer] The id of the game to add the review to
+#
+# @see Review
+#
+# @return [<slim>] <game page with the review added> 
+#
 post('/games/:id/review/add') do
     if session[:user_id].nil?
         unauthorized
@@ -38,7 +48,14 @@ post('/games/:id/review/add') do
     redirect "/games/#{videogame.id}"
 end
 
-
+# Displays the review to edit.
+#
+# @param :review_id [Integer] The id of the review to edit.
+#
+# @see Review
+#
+# @return [<slim>] <edit review page>
+#
 get('/games/:id/review/edit/:review_id') do
     if session[:user_id].nil?
         unauthorized
@@ -49,6 +66,16 @@ get('/games/:id/review/edit/:review_id') do
     slim(:'reviews/edit', locals: { review: review })
 end
 
+# Atempts to edit a review.
+#
+# @param :review_id [Integer] The id of the review to edit.
+# @param :rating [Integer] The rating of the game
+# @param :comment [String] The comment of the game
+#
+# @see Review
+#
+# @return [<slim>] <game page with the review edited>
+#
 post('/games/:id/review/edit/:review_id') do
     if session[:user_id].nil?
         unauthorized
@@ -94,7 +121,14 @@ end
 
 
 
-
+# Atempts to delete a review.
+# 
+# @param :review_id [Integer] The id of the review to delete.
+#
+# @see Review
+#
+# @return [<slim>] <game page with the review deleted>
+#
 get('/games/:id/review/delete/:review_id') do
     if session[:user_id].nil?
         unauthorized

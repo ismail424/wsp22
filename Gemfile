@@ -15,3 +15,6 @@ gem "rufo", "~> 0.13.0"
 gem "sinatra-flash", "~> 0.3.0"
 gem "securerandom", "~> 0.2.0"
 gem "rmagick", "~> 4.2"
+gem "yard", "~> 0.9.27"
+gem "yard-sinatra", "~> 1.0"
+

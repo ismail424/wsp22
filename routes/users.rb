@@ -1,9 +1,19 @@
-# Login Page
+# Displays the login page
+#
+# @return [<slim>] <login page>
+#
 get("/login") do
     slim(:"account/login")
 end
 
-# Login form
+# Attempts to login.
+#
+# @param [User] user The user to login.
+# 
+# @see User
+# 
+# @return [<slim>] <home page> if login is successful 
+#
 post("/login") do
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
@@ -22,7 +32,17 @@ get("/register") do
     slim(:"account/register")
 end
 
-# Register form
+# Attempts to register a new user.
+#
+# @param [String] username, The username of the user
+# @param [String] email, The email of the user
+# @param [String] password, The password of the user
+# @param [String] password_confirmation, The password confirmation of the user
+# 
+# @see User
+# 
+# @return [<slim>] <home page> if account successfully registered
+#
 post("/register") do
     
     begin
@@ -47,14 +67,34 @@ end
 
 
 # Profile Page
+#
+# @return [<slim>] <profile page>
+#
 get("/profile") do
     slim(:"account/profile")
 end
 
+# Displays the edit profile page
+#
+# @return [<slim>] <edit profile page> 
+#
 get("/profile/edit") do
     slim(:"account/edit")
 end
 
+
+## Attempts to edit the profile
+#
+# @param [File] avatar, The avatar of the user
+# @param [String] username, The new username of the user
+# @param [String] email, The new email of the user
+# @param [String] password, The new password of the user
+# @param [String] password_confirmation, The new password confirmation of the user
+# 
+# @see User
+# 
+# @return [<slim>] <profile page> if account successfully edited
+#
 post("/profile/edit") do
 
     begin
@@ -110,7 +150,7 @@ post("/profile/edit") do
 end
 
 
-# Logout
+## Logout
 get("/logout") do
     session.clear
     flash[:warning] = "You are now logged out"

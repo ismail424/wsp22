@@ -20,7 +20,8 @@ auth_needed = %w[/profile/edit /profile]
 ignored_paths = %w[/style.css /favicon.ico /auth-needed]
 auth_paths = %w[/login /register /auth-needed]
 
-# Before the http requests, check if user is logged in
+# Before the HTTP response is sent, check if user is authenticated
+#
 before do
     # Stroing the user in the session if he is logged in
     if session[:user_id]
@@ -40,13 +41,20 @@ before do
     (auth_paths.include? request.path_info) || session.delete(:return_to)
 end
 
-# CSS config for sass
+# CSS routes (sass stylesheet)
+#
+# @return [<css>] <css>
+#
 get('/css/style.css') do
     scss :'scss/style', :style => :compressed
 end
 
-# Home page
-get("/") do 
+
+# Display the home page
+#
+# @return [<slim>] <index page>
+#
+get("/") do   
     top_10_videogames = VideoGame.all(10)
     slim(:index, locals: { videogames: top_10_videogames })
 end
