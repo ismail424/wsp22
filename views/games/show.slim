@@ -26,7 +26,7 @@ link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome
           .game_review_star
             - (0..9).each do |i|
               span.fa.fa-star id="#{i}"
-            small#star_count = "0"
+            small#star_count = "1"
           textarea  name="review_text" placeholder="Write your review here..."
           button type="submit" Submit
         script src="/js/review.js" type="text/javascript" 
@@ -46,7 +46,7 @@ link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome
                 small.review_rating = "#{review.rating.to_i} / 10"
               .review_body
                 = review.comment
-              - if session[:user_id] == review.user_id || @user.admin == true
+              - if session[:user_id] == review.user_id || User.find(review.user_id).admin == true
                 .review_button
                   a.review_button_edit href="/games/#{review.game_id}/review/edit/#{review.id}"
                       | Edit

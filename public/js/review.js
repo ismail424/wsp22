@@ -4,6 +4,10 @@ try{
     let all_stars = document.querySelectorAll('.fa-star');
     let star_count = document.querySelector('#star_count');
     let rating_value  = document.querySelector('#rating_value');
+
+
+    all_stars[0].classList.add('checked');
+
     all_stars.forEach(function(star){
         star.addEventListener('mouseover',function(){
             let star_id = star.getAttribute('id');
