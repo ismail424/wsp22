@@ -17,4 +17,4 @@ gem "securerandom", "~> 0.2.0"
 gem "rmagick", "~> 4.2"
 gem "yard", "~> 0.9.27"
 gem "yard-sinatra", github: "chrisb/yard-sinatra"
-
+gem "concurrent-ruby", "~> 1.1"
