@@ -20,6 +20,7 @@ auth_needed = %w[/profile/edit /profile]
 ignored_paths = %w[/style.css /favicon.ico /auth-needed]
 auth_paths = %w[/login /register /auth-needed]
 
+#
 # Before the HTTP response is sent, check if user is authenticated
 #
 before do

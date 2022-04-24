@@ -150,7 +150,9 @@ post("/profile/edit") do
 end
 
 
-## Logout
+#  Logout
+#
+# @return [<slim>] <home page>
 get("/logout") do
     session.clear
     flash[:warning] = "You are now logged out"

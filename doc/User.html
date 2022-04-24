@@ -24,6 +24,8 @@
 
   <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
 
+  <script type="text/javascript" charset="utf-8" src="js/custom.js"></script>
+
 
   </head>
   <body>
@@ -101,7 +103,20 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>User model</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+
+</div>
 
 
 
@@ -274,7 +289,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_user-class_method" title="create_user (class method)">.<strong>create_user</strong>(username, password, email, profile_pic = &quot;https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64&quot;, admin = false)  &#x21d2; Object </a>
+      <a href="#create_user-class_method" title="create_user (class method)">.<strong>create_user</strong>(username, password, email, profile_pic = &quot;https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64&quot;, admin = false)  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -288,7 +303,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a user.</p>
+</div></span>
   
 </li>
 
@@ -296,7 +313,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#find_by_email-class_method" title="find_by_email (class method)">.<strong>find_by_email</strong>(email)  &#x21d2; Object </a>
+      <a href="#find_by_email-class_method" title="find_by_email (class method)">.<strong>find_by_email</strong>(email)  &#x21d2; &lt;User&gt; </a>
     
 
     
@@ -310,7 +327,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Finds user by email.</p>
+</div></span>
   
 </li>
 
@@ -318,7 +337,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#find_by_username-class_method" title="find_by_username (class method)">.<strong>find_by_username</strong>(username)  &#x21d2; Object </a>
+      <a href="#find_by_username-class_method" title="find_by_username (class method)">.<strong>find_by_username</strong>(username)  &#x21d2; &lt;User&gt; </a>
     
 
     
@@ -332,7 +351,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Finds user by username.</p>
+</div></span>
   
 </li>
 
@@ -340,7 +361,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#table_name-class_method" title="table_name (class method)">.<strong>table_name</strong>  &#x21d2; Object </a>
+      <a href="#table_name-class_method" title="table_name (class method)">.<strong>table_name</strong>  &#x21d2; &lt;String&gt; </a>
     
 
     
@@ -354,7 +375,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns table name.</p>
+</div></span>
   
 </li>
 
@@ -362,7 +385,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#validate-class_method" title="validate (class method)">.<strong>validate</strong>(data)  &#x21d2; Object </a>
+      <a href="#validate-class_method" title="validate (class method)">.<strong>validate</strong>(data)  &#x21d2; &lt;Bool&gt; </a>
     
 
     
@@ -376,7 +399,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Validates the user.</p>
+</div></span>
   
 </li>
 
@@ -393,7 +418,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#authenticate-instance_method" title="#authenticate (instance method)">#<strong>authenticate</strong>(password)  &#x21d2; Object </a>
+      <a href="#authenticate-instance_method" title="#authenticate (instance method)">#<strong>authenticate</strong>(password)  &#x21d2; &lt;Bool&gt; </a>
     
 
     
@@ -407,7 +432,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Authenticates the user.</p>
+</div></span>
   
 </li>
 
@@ -415,7 +442,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#defautl_profile_pic-instance_method" title="#defautl_profile_pic (instance method)">#<strong>defautl_profile_pic</strong>  &#x21d2; Object </a>
+      <a href="#defautl_profile_pic-instance_method" title="#defautl_profile_pic (instance method)">#<strong>defautl_profile_pic</strong>  &#x21d2; &lt;String&gt; </a>
     
 
     
@@ -429,29 +456,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#DELETE_full_path-instance_route" title="#DELETE full_path (instance route)">#<strong>DELETE full_path</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the default profile_pic.</p>
+</div></span>
   
 </li>
 
@@ -473,7 +480,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes profile_pic.</p>
+</div></span>
   
 </li>
 
@@ -498,7 +507,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of User.</p>
+<p>Initializes the object.</p>
 </div></span>
   
 </li>
@@ -533,13 +542,35 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns a new instance of User.</p>
+<p>Initializes the object</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>data,</span>
+      
+      
+        <span class='type'>(<tt>&lt;Hash&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data of the object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
 
 </div><table class="source_code">
   <tr>
@@ -547,18 +578,18 @@
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
-105</pre>
+186
+187
+188
+189
+190
+191
+192
+193
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
     <span class='kw'>super</span> <span class='id identifier rubyid_data'>data</span>
@@ -601,18 +632,20 @@
 <div class="tags">
   
 
+
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-92
-93
-94</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_admin'>admin</span>
   <span class='ivar'>@admin</span>
@@ -644,18 +677,20 @@
 <div class="tags">
   
 
+
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-92
-93
-94</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_email'>email</span>
   <span class='ivar'>@email</span>
@@ -687,18 +722,20 @@
 <div class="tags">
   
 
+
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-92
-93
-94</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_profile_pic'>profile_pic</span>
   <span class='ivar'>@profile_pic</span>
@@ -730,18 +767,20 @@
 <div class="tags">
   
 
+
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-92
-93
-94</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reviews'>reviews</span>
   <span class='ivar'>@reviews</span>
@@ -773,18 +812,20 @@
 <div class="tags">
   
 
+
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-92
-93
-94</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_username'>username</span>
   <span class='ivar'>@username</span>
@@ -804,31 +845,146 @@
       <div class="method_details first">
   <h3 class="signature first" id="create_user-class_method">
   
-    .<strong>create_user</strong>(username, password, email, profile_pic = &quot;https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64&quot;, admin = false)  &#x21d2; <tt>Object</tt> 
+    .<strong>create_user</strong>(username, password, email, profile_pic = &quot;https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/#{username}/64&quot;, admin = false)  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a user</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>username,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The username of the user</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>email,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The email of the user</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>password,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The password of the user</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>profile_pic,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The profile_pic of the user</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>admin,</span>
+      
+      
+        <span class='type'>(<tt>&lt;Bool&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The admin of the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124</pre>
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_user'>create_user</span><span class='lparen'>(</span><span class='id identifier rubyid_username'>username</span><span class='comma'>,</span> <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span><span class='comma'>,</span> <span class='id identifier rubyid_profile_pic'>profile_pic</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.gravatar.com/avatar/</span><span class='embexpr_beg'>#{</span><span class='const'>Digest</span><span class='op'>::</span><span class='const'>MD5</span><span class='period'>.</span><span class='id identifier rubyid_hexdigest'>hexdigest</span><span class='lparen'>(</span><span class='id identifier rubyid_email'>email</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_username'>username</span><span class='embexpr_end'>}</span><span class='tstring_content'>/64</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_admin'>admin</span> <span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_session'>session</span> <span class='op'>=</span> <span class='id identifier rubyid_db'><span class='object_link'><a href="top-level-namespace.html#db-instance_method" title="#db (method)">db</a></span></span>
@@ -848,25 +1004,76 @@
       <div class="method_details ">
   <h3 class="signature " id="find_by_email-class_method">
   
-    .<strong>find_by_email</strong>(email)  &#x21d2; <tt>Object</tt> 
+    .<strong>find_by_email</strong>(email)  &#x21d2; <tt>&lt;<span class='object_link'><a href="" title="User (class)">User</a></span>&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds user by email</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>email,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The email of the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;<span class='object_link'><a href="" title="User (class)">User</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;The user&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-131
-132
-133
-134</pre>
+257
+258
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 257</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_find_by_email'>find_by_email</span><span class='lparen'>(</span><span class='id identifier rubyid_email'>email</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_db'><span class='object_link'><a href="top-level-namespace.html#db-instance_method" title="#db (method)">db</a></span></span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_table_name'>table_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> WHERE email = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -880,25 +1087,76 @@
       <div class="method_details ">
   <h3 class="signature " id="find_by_username-class_method">
   
-    .<strong>find_by_username</strong>(username)  &#x21d2; <tt>Object</tt> 
+    .<strong>find_by_username</strong>(username)  &#x21d2; <tt>&lt;<span class='object_link'><a href="" title="User (class)">User</a></span>&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Finds user by username</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>username,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The username of the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;<span class='object_link'><a href="" title="User (class)">User</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;The user&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-126
-127
-128
-129</pre>
+245
+246
+247
+248</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_find_by_username'>find_by_username</span><span class='lparen'>(</span><span class='id identifier rubyid_username'>username</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_db'><span class='object_link'><a href="top-level-namespace.html#db-instance_method" title="#db (method)">db</a></span></span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_table_name'>table_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> WHERE LOWER(username) = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_username'>username</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -912,24 +1170,55 @@
       <div class="method_details ">
   <h3 class="signature " id="table_name-class_method">
   
-    .<strong>table_name</strong>  &#x21d2; <tt>Object</tt> 
+    .<strong>table_name</strong>  &#x21d2; <tt>&lt;String&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns table name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;The table name&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-93
-94
-95</pre>
+177
+178
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 177</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_table_name'>table_name</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Users</span><span class='tstring_end'>&quot;</span></span>
@@ -942,41 +1231,92 @@
       <div class="method_details ">
   <h3 class="signature " id="validate-class_method">
   
-    .<strong>validate</strong>(data)  &#x21d2; <tt>Object</tt> 
+    .<strong>validate</strong>(data)  &#x21d2; <tt>&lt;Bool&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Validates the user</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data,</span>
+      
+      
+        <span class='type'>(<tt>&lt;Hash&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The data of the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Bool&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;Returns if the user is valid&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155</pre>
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 269</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_validate'>validate</span><span class='lparen'>(</span> <span class='id identifier rubyid_data'>data</span> <span class='rparen'>)</span>
  
@@ -1012,24 +1352,75 @@
       <div class="method_details first">
   <h3 class="signature first" id="authenticate-instance_method">
   
-    #<strong>authenticate</strong>(password)  &#x21d2; <tt>Object</tt> 
+    #<strong>authenticate</strong>(password)  &#x21d2; <tt>&lt;Bool&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Authenticates the user</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>password,</span>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The password of the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Bool&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;Returns if user is authenticated&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-107
-108
-109</pre>
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_authenticate'>authenticate</span><span class='lparen'>(</span><span class='id identifier rubyid_password'>password</span><span class='rparen'>)</span>
     <span class='ivar'>@password_hash</span> <span class='op'>==</span> <span class='id identifier rubyid_password'>password</span>
@@ -1042,54 +1433,59 @@
       <div class="method_details ">
   <h3 class="signature " id="defautl_profile_pic-instance_method">
   
-    #<strong>defautl_profile_pic</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>defautl_profile_pic</strong>  &#x21d2; <tt>&lt;String&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the default profile_pic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;The default profile_pic&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-111
-112
-113</pre>
+212
+213
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 212</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_defautl_profile_pic'>defautl_profile_pic</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.gravatar.com/avatar/</span><span class='embexpr_beg'>#{</span><span class='const'>Digest</span><span class='op'>::</span><span class='const'>MD5</span><span class='period'>.</span><span class='id identifier rubyid_hexdigest'>hexdigest</span><span class='lparen'>(</span><span class='ivar'>@email</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@username</span><span class='embexpr_end'>}</span><span class='tstring_content'>/64</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="DELETE_full_path-instance_route">
-  
-    #<strong>DELETE full_path</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-159</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 159</span>
-
-<span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_full_path'>full_path</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -1104,21 +1500,34 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes profile_pic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-157
-158
-159
-160
-161
-162</pre>
+293
+294
+295
+296
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'utils/database.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'utils/database.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_profile_pic'>delete_profile_pic</span>
     <span class='id identifier rubyid_full_path'>full_path</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>public</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@profile_pic</span><span class='rparen'>)</span>
@@ -1136,7 +1545,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Apr 23 18:21:47 2022 by
+  Generated on Sun Apr 24 22:18:35 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-2.7.0).
 </div>

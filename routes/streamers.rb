@@ -11,9 +11,7 @@ end
 
 # Displays streamer with given id.
 #
-# @param [Integer] :id, The id of the streamer to display
-#
-# @see Streamer
+# @param :id [Integer] ID of streamer to display
 #
 # @return [<slim>] <streamer with given id page>
 #

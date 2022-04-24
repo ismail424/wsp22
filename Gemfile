@@ -16,5 +16,5 @@ gem "sinatra-flash", "~> 0.3.0"
 gem "securerandom", "~> 0.2.0"
 gem "rmagick", "~> 4.2"
 gem "yard", "~> 0.9.27"
-gem "yard-sinatra", "~> 1.0"
+gem "yard-sinatra", github: "chrisb/yard-sinatra"
 
